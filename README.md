@@ -1,4 +1,6 @@
+
 # Brendan's Freaking Task List
+[![Build Status](https://cheezmeister.semaphoreci.com/badges/bftl/branches/master.svg)](https://cheezmeister.semaphoreci.com/projects/bftl)
 
 A happy little task list. Spiritual successor to https://github.com/cheezmeister/fantaskulous and https://github.com/cheezmeister/fkls
 
