@@ -1,6 +1,6 @@
 # Brendan's Freaking Task List
 
-A happy little task list. Spiritual successor to https://github.com/cheezmeister/fkls
+A happy little task list. Spiritual successor to https://github.com/cheezmeister/fantaskulous and https://github.com/cheezmeister/fkls
 
 ## Notes to Self
 
