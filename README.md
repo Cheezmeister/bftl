@@ -1,3 +1,22 @@
+# Brendan's Freaking Task List
+
+A happy little task list. Spiritual successor to https://github.com/cheezmeister/fkls
+
+## Notes to Self
+
+Here are the things I needed to do on macos to just get started. Devenv setup first happened circa September 2023.
+
+```console
+cd /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/include/ruby-2.6.0
+sudo ln -sf ../../../../Headers/ruby/config.h
+sudo ln -sf universal-darwin23 universal-darwin22
+```
+
+See: https://stackoverflow.com/a/65481787/118220
+
+
+---
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
