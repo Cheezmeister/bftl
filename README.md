@@ -1,6 +1,10 @@
 
 # Brendan's Freaking Task List
-[![Build Status](https://cheezmeister.semaphoreci.com/badges/bftl/branches/master.svg)](https://cheezmeister.semaphoreci.com/projects/bftl)
+[![SemaphoreCI Status](https://cheezmeister.semaphoreci.com/badges/bftl/branches/master.svg)][semaphoreci]
+[![GitHub Status](https://github.com/cheezmeister/bftl/actions/workflows/node.js.yml/badge.svg)][workflows]
+
+[workflows]: https://github.com/Cheezmeister/bftl/actions/workflows/node.js.yml
+[semaphoreci]: https://cheezmeister.semaphoreci.com/projects/bftl
 
 A happy little task list. Spiritual successor to https://github.com/cheezmeister/fantaskulous and https://github.com/cheezmeister/fkls
 
