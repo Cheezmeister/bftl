@@ -20,6 +20,15 @@ sudo ln -sf universal-darwin23 universal-darwin22
 
 See: https://stackoverflow.com/a/65481787/118220
 
+## TODO
+
+- [x] Pull in sample tasks
+- [ ] Parse #project and @contexts
+- [ ] Implement edit existing tasks
+- [ ] Implement change priority
+- [ ] Implement sort by priority
+- [ ] Evaluate https://github.com/jonathanpalma/react-native-tesseract-ocr
+- [ ] Evaluate https://emotion.sh/docs/install
 
 ---
 
