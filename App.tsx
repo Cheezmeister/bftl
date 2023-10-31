@@ -15,7 +15,6 @@ import type { PropsWithChildren } from 'react';
 import {
   FlatList,
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
@@ -26,17 +25,11 @@ import {
 
 import {
   Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
 import { Task, Tasks, TaskView } from './Task';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import QRCode from 'qrcode.react'; // FIXME
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -109,16 +102,7 @@ function Section({ children, title }: SectionProps): JSX.Element {
   );
 }
 
-enum Priority {
-  HIGHEST,
-  HIGH,
-  MEDIUM,
-  LOW,
-  LOWEST,
-  NONE,
-}
-
-const DATA: Task[] = SAMPLE_TASKS.map(Tasks.fromText);
+// const DATA: Task[] = SAMPLE_TASKS.map(Tasks.fromText);
 
 const TaskInput = ({ text, onChangeText, onAddTask }) => (
   <>
@@ -135,94 +119,69 @@ const TaskInput = ({ text, onChangeText, onAddTask }) => (
 
 
 function FreakingTaskList(): JSX.Element {
-  const renderItem = ({ item, index }) => (
-    <TaskView idx={index} task={item} />
+  const renderItem = ({ item, index }) => !item.isCompleted && (
+    <TaskView idx={index} task={item} handleOnPress={()=>{
+      let [newItem] = taskData.splice(index, 1);
+      newItem.isCompleted = !newItem.isCompleted;
+      setTaskData([...taskData, newItem]);
+      console.log(newItem);
+    }} />
   );
   const [newTaskText, setNewTaskText] = useState<string>('');
 
-  const [taskData, setTaskData] = useState<Task[]>(DATA);
+  const [taskData, setTaskData] = useState<Task[]>([]);
 
   const [isLoading, setLoading] = useState(true);
 
   const load = (async () => {
+    let result;
     try {
-      const result = await AsyncStorage.getItem('tasks')
+      result = await AsyncStorage.getItem('tasks')
     } catch (e: any) {
       // FIXME
-      /* setTaskData([...taskData, { */
-      /*   id: uuidv4(), */
-      /*   uuid: uuidv4(), */
-      /*   description: `oh noez! ${e}`, */
-      /*   title: `oh noez! ${e}`, */
-      /*   isCompleted: false, */
-      /*   priority: Priority.MEDIUM, */
-      /* }]); */
+      console.error('loading tasks from AsyncStorage');
+      console.error(e);
+    }
+    if (result) {
+      const parsed = JSON.parse(result);
+      setTaskData(parsed);
     }
   });
 
-  const save = async (value) => {
+  const save = async (key: string, value: string) => {
     try {
-      await AsyncStorage.setItem('tasks', taskData);
+      await AsyncStorage.setItem(key, value);
     } catch (e: any) {
       // FIXME
     }
   };
 
   const handleAddTask = (task: string) => {
-    setTaskData([...taskData, {
+    const it: Task[] = [...taskData, {
       id: uuidv4(),
       uuid: uuidv4(),
       description: task,
       title: ' . ' + task,
       isCompleted: false,
-      priority: Priority.MEDIUM,
-    }]);
+      priority: 'C',
+    }];
+    save('tasks', JSON.stringify(it)).then(() => setTaskData(it));
   };
+
+  load();
 
   return (
     <View style={styles.freakingTaskList}>
       <FlatList data={taskData}
         renderItem={renderItem}
         keyExtractor={item => item.uuid} />
-      <TaskInput text={newTaskText} onChangeText={setNewTaskText} onAddTask={handleAddTask} />
+      <TaskInput
+        text={newTaskText}
+        onChangeText={setNewTaskText}
+        onAddTask={handleAddTask} />
     </View>
   );
 }
-
-const DefaultContent = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-  return (
-    <ScrollView
-      contentInsetAdjustmentBehavior="automatic"
-      style={backgroundStyle}>
-      <Header />
-      <View
-        style={{
-          backgroundColor: isDarkMode ? Colors.black : Colors.white,
-        }}>
-        <Section title="Step One">
-          Edit <Text style={styles.highlight}>This sproinking file</Text> to change this
-          screen and then come back to see your edits.
-        </Section>
-        <Section title="See Your Changes">
-          <ReloadInstructions />
-        </Section>
-        <Section title="Debug">
-          <DebugInstructions />
-        </Section>
-        <Section title="Learn More">
-          Read the docs to discover what to do next:
-        </Section>
-        <LearnMoreLinks />
-      </View>
-    </ScrollView>
-  );
-};
-
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';

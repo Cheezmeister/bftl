@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import {
+    GestureResponderEvent,
+    Pressable,
   StyleSheet,
   Text,
   View,
@@ -30,9 +32,8 @@ export const Tasks = {
 
     const letter = priorityLetter?.substr(1,1);
 
-    const priority = priorityKey[ letter ] ?? Priority.NONE;
+    const priority = letter;
 
-    const randomPri = [Priority.LOW, Priority.LOWEST, Priority.MEDIUM, Priority.HIGH, Priority.HIGHEST][(Math.floor(Math.random() * 5))];
     return {
       id: uuidv4(),
       uuid: uuidv4(),
@@ -45,47 +46,33 @@ export const Tasks = {
   }
 };
 
-enum Priority {
-  HIGHEST,
-  HIGH,
-  MEDIUM,
-  LOW,
-  LOWEST,
-  NONE,
-}
+type Priority = Letter;
 
 const priorityColorMap = {
-  [Priority.NONE]:  '#ccc',
-  [Priority.LOWEST]:  '#cfc',
-  [Priority.LOW]:  '#afa',
-  [Priority.MEDIUM]:  '#ffa',
-  [Priority.HIGH]:  '#faa',
-  [Priority.HIGHEST]:  '#f88',
+  'F':  '#ccc',
+  'E':  '#cfc',
+  'D':  '#afa',
+  'C':  '#ffa',
+  'B':  '#faa',
+  'A':  '#f88',
 };
 
-const priorityKey = {
-  A: Priority.HIGHEST,
-  B: Priority.HIGH,
-  C: Priority.MEDIUM,
-  D: Priority.LOW,
-  E: Priority.LOWEST,
-  F: Priority.NONE,
-};
-
-type PriorityProps = { letter: Letter, priority: Priority };
-export const PriorityView = ({ letter, priority }: PriorityProps) => (
+type PriorityProps = { priority: Priority };
+export const PriorityView = ({ priority }: PriorityProps) => (
   <View style={{ ...styles.priorityContainer,
-                 backgroundColor: priorityColorMap[priority],
+                 backgroundColor: priorityColorMap[priority] || '#ccc',
                  borderColor: '#ccc' }}>
-    <Text>{letter}</Text>
+    <Text>{priority}</Text>
   </View>
 );
 
-type TaskProps = { idx: number, task: Task };
+type TaskProps = { idx: number, task: Task, handleOnPress: (e: GestureResponderEvent)=>void };
 
-export const TaskView = ({ idx, task }: TaskProps) => (
+export const TaskView = ({ idx, task, handleOnPress }: TaskProps) => (
   <View style={{ margin: 2, flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-    <View style={styles.checkbox}></View>
+    <Pressable onPress={handleOnPress}>
+      <View style={styles.checkbox}></View>
+    </Pressable>
     <PriorityView letter={task.letter} priority={task.priority}></PriorityView>
     <Text style={{}}>{task.description}</Text>
   </View>
