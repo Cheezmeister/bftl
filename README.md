@@ -27,6 +27,7 @@ See: https://stackoverflow.com/a/65481787/118220
 - [ ] Implement edit existing tasks
 - [ ] Implement change priority
 - [ ] Implement sort by priority
+- [ ] Implement "done"
 - [ ] Evaluate https://github.com/jonathanpalma/react-native-tesseract-ocr
 - [ ] Evaluate https://emotion.sh/docs/install
 

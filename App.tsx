@@ -119,14 +119,6 @@ const TaskInput = ({ text, onChangeText, onAddTask }) => (
 
 
 function FreakingTaskList(): JSX.Element {
-  const renderItem = ({ item, index }) => !item.isCompleted && (
-    <TaskView idx={index} task={item} handleOnPress={()=>{
-      let [newItem] = taskData.splice(index, 1);
-      newItem.isCompleted = !newItem.isCompleted;
-      setTaskData([...taskData, newItem]);
-      console.log(newItem);
-    }} />
-  );
   const [newTaskText, setNewTaskText] = useState<string>('');
 
   const [taskData, setTaskData] = useState<Task[]>([]);
@@ -134,6 +126,8 @@ function FreakingTaskList(): JSX.Element {
   const [isLoading, setLoading] = useState(true);
 
   const load = (async () => {
+    if (!isLoading) return;
+
     let result;
     try {
       result = await AsyncStorage.getItem('tasks')
@@ -145,6 +139,7 @@ function FreakingTaskList(): JSX.Element {
     if (result) {
       const parsed = JSON.parse(result);
       setTaskData(parsed);
+      setLoading(false);
     }
   });
 
@@ -167,6 +162,23 @@ function FreakingTaskList(): JSX.Element {
     }];
     save('tasks', JSON.stringify(it)).then(() => setTaskData(it));
   };
+
+  const handleOnPress = (item, index) => {
+    const newItem = {
+      ...taskData[index], // [newItem] = taskData.splice(index, 1);
+      isCompleted: !taskData[index].isCompleted,
+    };
+    const newTaskData = [
+      ...taskData.filter(i => i.uuid != item.uuid),
+      newItem
+    ];
+
+    save('tasks', JSON.stringify(newTaskData)).then(() => setTaskData(newTaskData));
+  };
+
+  const renderItem = ({ item, index }) => /* !item.isCompleted && */ (
+    <TaskView idx={index} task={item} handleOnPress={() => handleOnPress(item, index)} />
+  );
 
   load();
 

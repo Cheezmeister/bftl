@@ -71,7 +71,9 @@ type TaskProps = { idx: number, task: Task, handleOnPress: (e: GestureResponderE
 export const TaskView = ({ idx, task, handleOnPress }: TaskProps) => (
   <View style={{ margin: 2, flexDirection: 'row', alignItems: 'center', gap: 4 }}>
     <Pressable onPress={handleOnPress}>
-      <View style={styles.checkbox}></View>
+      <View style={styles.checkbox}>
+        {task.isCompleted && <Text>☑️</Text>}
+      </View>
     </Pressable>
     <PriorityView letter={task.letter} priority={task.priority}></PriorityView>
     <Text style={{}}>{task.description}</Text>
