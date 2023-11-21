@@ -12,7 +12,6 @@
     "wtf": "npx react-native start --reset-cache"
   },
   "dependencies": {
-    "qrcode.react": "^3.1.0",
     "react": "18.2.0",
     "react-native": "0.72.4",
     "react-native-get-random-values": "^1.9.0",
