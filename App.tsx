@@ -5,7 +5,6 @@
  * @format
  */
 
-// import uuid from 'react-native-uuid';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -177,7 +176,9 @@ function FreakingTaskList(): JSX.Element {
   };
 
   const renderItem = ({ item, index }) => /* !item.isCompleted && */ (
-    <TaskView idx={index} task={item} handleOnPress={() => handleOnPress(item, index)} />
+    <TaskView idx={index} task={item}
+      handleTapPriority={() => {} }
+      handleOnPress={() => handleOnPress(item, index)} />
   );
 
   load();
