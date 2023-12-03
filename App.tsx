@@ -150,6 +150,14 @@ function FreakingTaskList(): JSX.Element {
     }
   };
 
+  const byPriority = (a: Task, b: Task) => {
+    if (a.priority === b.priority) {
+      return a.description < b.description;
+    }
+    return a.priority < b.priority;
+
+  }
+
   const handleAddTask = (task: string) => {
     const it: Task[] = [...taskData, {
       id: uuidv4(),
@@ -162,7 +170,7 @@ function FreakingTaskList(): JSX.Element {
     save('tasks', JSON.stringify(it)).then(() => setTaskData(it));
   };
 
-  const handleOnPress = (item, index) => {
+  const handleToggleComplete = (item, index) => {
     const newItem = {
       ...taskData[index], // [newItem] = taskData.splice(index, 1);
       isCompleted: !taskData[index].isCompleted,
@@ -175,10 +183,23 @@ function FreakingTaskList(): JSX.Element {
     save('tasks', JSON.stringify(newTaskData)).then(() => setTaskData(newTaskData));
   };
 
+  const handleSelectPriority = (priority: Letter, item, index) => {
+    const newItem = {
+      ...taskData[index],
+      priority,
+    };
+    const newTaskData = [
+      ...taskData.filter(i => i.uuid != item.uuid),
+      newItem
+    ].sort(byPriority);
+
+    save('tasks', JSON.stringify(newTaskData)).then(() => setTaskData(newTaskData));
+  }
+
   const renderItem = ({ item, index }) => /* !item.isCompleted && */ (
     <TaskView idx={index} task={item}
-      handleTapPriority={() => {} }
-      handleOnPress={() => handleOnPress(item, index)} />
+      handleSelectPriority={(priority) => { handleSelectPriority(priority, item, index) }}
+      handleToggleComplete={() => handleToggleComplete(item, index)} />
   );
 
   load();

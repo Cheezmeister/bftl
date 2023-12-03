@@ -98,8 +98,8 @@ export const PriorityView = ({priority}: PriorityProps) => (
 type TaskProps = {
   idx: number;
   task: Task;
-  handleOnPress: (e: GestureResponderEvent) => void;
-  handleTapPriority: (e: GestureResponderEvent) => void;
+  handleToggleComplete: (e: GestureResponderEvent) => void;
+  handleSelectPriority: (e: GestureResponderEvent) => void;
 };
 
 `
@@ -115,8 +115,8 @@ type TaskProps = {
 export function TaskView({
   idx,
   task,
-  handleOnPress,
-  handleTapPriority,
+  handleToggleComplete,
+  handleSelectPriority,
 }: TaskProps) {
   const [isPriorityModalVisible, setPriorityModalVisible] = useState(false);
   const handleTapPriorityWrapper = () => {
@@ -126,10 +126,21 @@ export function TaskView({
     setPriorityModalVisible(false);
   };
 
+  if (!handleSelectPriority) {
+    throw "WAT";
+  }
+
+  const onSelectPriority = priority => {
+    hideDialog();
+    handleSelectPriority(priority);
+  };
+
   return (
     <View
-      style={{margin: 2, flexDirection: 'row', alignItems: 'center', gap: 4}}>
-      <Pressable onPress={handleOnPress}>
+      key={task.uuid}
+      style={{margin: 2, flexDirection: 'row', alignItems: 'center', gap: 4}}
+    >
+      <Pressable onPress={handleToggleComplete}>
         <View style={styles.checkbox}>
           {task.isCompleted && <Text>☑️</Text>}
         </View>
@@ -139,7 +150,7 @@ export function TaskView({
       </Pressable>
       <Dialog
         visible={isPriorityModalVisible}
-        onClose={hideDialog}
+        onClose={() => hideDialog()}
         title="Priority"
         description="Set Priority">
         <View
@@ -151,12 +162,14 @@ export function TaskView({
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          {ALL_LETTERS.map(letter => (
-            <PriorityView
-              style={{margin: '16px'}}
-              key={letter}
-              priority={letter}
-            />
+          {ALL_LETTERS.map(priority => (
+            <Pressable onPress={() => onSelectPriority(priority)}>
+              <PriorityView
+                style={{margin: '16px'}}
+                key={priority}
+                priority={priority}
+              />
+            </Pressable>
           ))}
         </View>
       </Dialog>
