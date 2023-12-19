@@ -23,11 +23,13 @@ See: https://stackoverflow.com/a/65481787/118220
 ## TODO
 
 - [ ] Stop using this list, and dogfood instead
+- [ ] Fix CI
 - [x] Pull in sample tasks
 - [ ] Parse #project and @contexts
+- [ ] Implement "add blocker"
 - [ ] Implement edit existing tasks
-- [ ] Implement change priority
-- [ ] Implement sort by priority
+- [x] Implement change priority
+- [x] Implement sort by priority
 - [x] Implement "done"
 - [ ] Evaluate https://github.com/jonathanpalma/react-native-tesseract-ocr
 - [ ] Evaluate https://emotion.sh/docs/install
@@ -42,45 +44,11 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 ## Step 1: Start the Metro Server
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
-
-To start Metro, run the following command from the _root_ of your React Native project:
-
-```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
-```
+First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native. Use `npm start`
 
 ## Step 2: Start your Application
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
-
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+Press `i` or `a` as prompted by Metro to run an iOS or Android emulator.
 
 ## Step 3: Modifying your App
 

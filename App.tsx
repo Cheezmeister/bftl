@@ -152,9 +152,10 @@ function FreakingTaskList(): JSX.Element {
 
   const byPriority = (a: Task, b: Task) => {
     if (a.priority === b.priority) {
-      return a.description < b.description;
+      if (a.description === b.description) return 0
+      return a.description > b.description ? 1 : -1;
     }
-    return a.priority < b.priority;
+    return a.priority > b.priority ? 1 : -1;
 
   }
 
@@ -191,7 +192,7 @@ function FreakingTaskList(): JSX.Element {
     const newTaskData = [
       ...taskData.filter(i => i.uuid != item.uuid),
       newItem
-    ].sort(byPriority);
+    ];
 
     save('tasks', JSON.stringify(newTaskData)).then(() => setTaskData(newTaskData));
   }
@@ -206,7 +207,7 @@ function FreakingTaskList(): JSX.Element {
 
   return (
     <View style={styles.freakingTaskList}>
-      <FlatList data={taskData}
+      <FlatList data={taskData.sort(byPriority)}
         renderItem={renderItem}
         keyExtractor={item => item.uuid} />
       <TaskInput

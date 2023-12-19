@@ -91,7 +91,7 @@ export const PriorityView = ({priority}: PriorityProps) => (
       backgroundColor: priorityColorMap[priority] || '#ccc',
       borderColor: '#ccc',
     }}>
-    <Text>{priority}</Text>
+    <Text style={styles.priorityLabel}>{priority}</Text>
   </View>
 );
 
@@ -163,10 +163,12 @@ export function TaskView({
             alignItems: 'center',
           }}>
           {ALL_LETTERS.map(priority => (
-            <Pressable onPress={() => onSelectPriority(priority)}>
+            <Pressable
+              key={priority}
+              onPress={() => onSelectPriority(priority)}
+            >
               <PriorityView
                 style={{margin: '16px'}}
-                key={priority}
                 priority={priority}
               />
             </Pressable>
@@ -191,5 +193,8 @@ const styles = StyleSheet.create({
     height: 32,
     borderRadius: 16,
     padding: 8,
+  },
+  priorityLabel: {
+    textAlign: 'center',
   },
 });
