@@ -22,8 +22,9 @@ See: https://stackoverflow.com/a/65481787/118220
 
 ## TODO
 
-- [ ] Stop using this list, and dogfood instead
+
 - [ ] Fix CI
+- [ ] Stop using this list, and dogfood instead
 - [x] Pull in sample tasks
 - [ ] Parse #project and @contexts
 - [ ] Implement "add blocker"
