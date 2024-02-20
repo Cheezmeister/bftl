@@ -39,6 +39,8 @@ type Letter =
   | 'Y'
   | 'Z';
 
+type Priority = Letter;
+
 const ALL_LETTERS: Letter[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 export interface Task {
@@ -71,8 +73,6 @@ export const Tasks = {
     };
   },
 };
-
-type Priority = Letter;
 
 const priorityColorMap = {
   F: '#ccc',
