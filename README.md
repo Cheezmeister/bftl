@@ -23,18 +23,18 @@ See: https://stackoverflow.com/a/65481787/118220
 ## TODO
 
 
-- [ ] Fix CI
 - [ ] Stop using this list, and dogfood instead
-- [x] Pull in sample tasks
-- [ ] Parse #project and @contexts
-- [ ] Implement "add blocker"
+- [ ] Fix CI
+- [ ] Fill in REQUIREMENTS.md
+- [ ] Evaluate https://emotion.sh/docs/install
+- [ ] Evaluate https://github.com/jonathanpalma/react-native-tesseract-ocr
+- [ ] Implement "create blocker"
 - [ ] Implement edit existing tasks
+- [ ] Parse #project and @contexts
+- [x] Implement "done"
 - [x] Implement change priority
 - [x] Implement sort by priority
-- [x] Implement "done"
-- [ ] Evaluate https://github.com/jonathanpalma/react-native-tesseract-ocr
-- [ ] Evaluate https://emotion.sh/docs/install
-
+- [x] Pull in sample tasks
 ---
 
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
