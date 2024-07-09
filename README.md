@@ -10,7 +10,7 @@ A happy little task list. Spiritual successor to https://github.com/cheezmeister
 
 ## Notes to Self
 
-Here are the things I needed to do on macos to just get started. Devenv setup first happened circa September 2023.
+Here are the things I needed to do on macos to get started. Devenv setup first happened circa September 2023.
 
 ```console
 cd /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/include/ruby-2.6.0
@@ -35,9 +35,12 @@ See: https://stackoverflow.com/a/65481787/118220
 - [x] Implement change priority
 - [x] Implement sort by priority
 - [x] Pull in sample tasks
+
 ---
 
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+<details> 
+
+   This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
 
@@ -82,3 +85,5 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+</details>
