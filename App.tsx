@@ -104,14 +104,17 @@ function Section({ children, title }: SectionProps): JSX.Element {
 
 const TaskInput = ({ text, onChangeText, onAddTask }) => (
   <>
-    <TextInput
-      style={styles.taskInput}
-      placeholder="Add Task"
-      onChangeText={newText => { onChangeText(newText) }}
-      onSubmitEditing={({ nativeEvent }) => onAddTask(nativeEvent.text)}
-      autoCorrect={false}
-      value={text}
-    />
+    <View style={{flexDirection: 'row'}}>
+      <Text>TODO: Make OK button</Text>
+      <TextInput
+        style={styles.taskInput}
+        placeholder="Add Task"
+        onChangeText={newText => { onChangeText(newText) }}
+        onSubmitEditing={({ nativeEvent }) => onAddTask(nativeEvent.text)}
+        autoCorrect={false}
+        value={text}
+      />
+    </View>
   </>
 );
 
@@ -130,7 +133,7 @@ function FreakingTaskList(): JSX.Element {
     try {
       result = await AsyncStorage.getItem('tasks')
     } catch (e: any) {
-      // FIXME
+      // FIXME: Pop friendly dialog
       console.error('loading tasks from AsyncStorage');
       console.error(e);
     }
@@ -158,7 +161,7 @@ function FreakingTaskList(): JSX.Element {
 
   }
 
-  const handleAddTask = (task: string) => {
+  const handleAddTask = async (task: string) => {
     const it: Task[] = [...taskData, {
       id: uuidv4(),
       uuid: uuidv4(),
@@ -167,7 +170,9 @@ function FreakingTaskList(): JSX.Element {
       isCompleted: false,
       priority: 'C',
     }];
-    save('tasks', JSON.stringify(it)).then(() => setTaskData(it));
+    await save('tasks', JSON.stringify(it));
+    setTaskData(it);
+    setNewTaskText('');
   };
 
   const handleToggleComplete = (item, index) => {

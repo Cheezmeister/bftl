@@ -31,6 +31,8 @@ See: https://stackoverflow.com/a/65481787/118220
 - [ ] Implement "create blocker"
 - [ ] Implement edit existing tasks
 - [ ] Parse #project and @contexts
+- [ ] Test on device
+- [ ] Deploy to device
 - [x] Implement "done"
 - [x] Implement change priority
 - [x] Implement sort by priority
